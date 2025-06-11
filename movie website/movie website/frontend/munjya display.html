@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Confirmation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            /* background-color: rgb(244, 244, 244); */
+            background-color: beige;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            background: #fff;
+            margin: 0 auto;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #0056b3;
+            margin-bottom: 10px;
+        }
+
+        .header img {
+            width: 60%;
+            margin-bottom: 20px;
+        }
+
+        .information {
+            padding: 0 20px; /* Matches total-section width */
+            margin-bottom: 0; /* Remove gap between information and total-section */
+        }
+
+        .booking-details {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .booking-details h3 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            color: #007bff;
+        }
+
+        .booking-details .details {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .cinema-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .cinema-info .info-item {
+            text-align: center;
+            width: 30%;
+        }
+
+        .cinema-info .info-item i {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 3px;
+        }
+
+        .cinema-info .info-item p {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .cinema-info .info-item p strong {
+            font-size: 16px;
+        }
+
+        .cinema-info .separator {
+            border-left: 1px solid #ccc;
+            height: 80px;
+        }
+
+        .time-info {
+            text-align: center;
+        }
+
+        .time-info i {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 3px;
+        }
+
+        .tickets h4 {
+            font-size: 16px;
+            color: #0056b3;
+            margin-bottom: 10px;
+        }
+
+        .ticket-type {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .inox-screen-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .inox-screen-info .info-item {
+            text-align: center;
+            width: 45%;
+        }
+
+        .inox-screen-info .info-item i {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 3px;
+        }
+
+        .inox-screen-info .separator {
+            border-left: 1px solid #ccc;
+            height: 60px;
+        }
+
+        .total-section {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-section p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .total-section h3 {
+            font-size: 16px;
+            color: #fff;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .total-section .cost {
+            font-size: 16px;
+        }
+
+        .information {
+            border-top: 2px dashed #000; /* Top border */
+            border-left: 2px dashed #000; /* Left border */
+            border-right: 2px dashed #000; /* Right border */
+            border-bottom: none;           /* No bottom border */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h2>CONGRATULATIONS!</h2>
+            <h1>Your ticket(s) are confirmed</h1>
+            <img src="Munjya poster.jpg" alt="munjya movie">
+        </div>
+
+        <!-- Information Section -->
+        <div class="information">
+            <!-- Booking Details -->
+            <div class="booking-details">
+                <h3>MUNJYA</h3>
+                <p class="details">Adventure, Comedy | Hindi | 1 hr 49 mins | PG-13</p>
+                <p>Selected Seat(s): <strong id="selectedSeats"></strong></p>
+            </div>
+
+            <!-- Cinema Info -->
+            <div class="cinema-info">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p><strong>Garland</strong></p>
+                    <p>Texas</p>
+                </div>
+                <div class="separator"></div>
+                <div class="info-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p><strong id="selectedDate">October 2024</strong></p>
+                </div>
+                <div class="separator"></div>
+                <div class="info-item time-info">
+                    <i class="fas fa-clock"></i>
+                    <p id="selectedTime">p.m.</p>
+                </div>
+            </div>
+
+            <!-- INOX and Screen Info in One Line -->
+            <div class="inox-screen-info">
+                <div class="info-item">
+                    <i class="fas fa-theater-masks"></i>
+                    <p><strong>INOX</strong></p>
+                </div>
+                <div class="separator"></div>
+                <div class="info-item">
+                    <i class="fas fa-tv"></i>
+                    <p>Screen 1</p>
+                </div>
+            </div>
+
+            <!-- Tickets Info -->
+            <div class="tickets">
+                <h4>Booking Summary</h4>
+                <div class="ticket-type">
+                    <p>Amount</p>
+                    <p id="amount"></p>
+                </div>
+                <div class="ticket-type">
+                    <p>Convenience Fees</p>
+                    <p id="convenienceFees"></p>
+                </div>
+                <div class="ticket-type">
+                    <p>Integrated GST(IGST) @ 18%</p>
+                    <p id="gst"></p>
+                </div>
+            </div>
+        </div> <!-- End of Information Section -->
+
+        <!-- Sub Total Section -->
+        <div class="total-section">
+            <h3>SUB TOTAL</h3>
+            <p class="cost" id="subtotal"></p>
+        </div>
+    </div>
+
+    <!-- <script>
+        // Function to display booking information
+        document.addEventListener('DOMContentLoaded', () => {
+            // Retrieve data from localStorage
+            const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats')) || [];
+            const selectedDate = localStorage.getItem('selectedDate');
+            const selectedTime = localStorage.getItem('selectedTime');
+            const totalPrice = localStorage.getItem('totalPrice');
+            const subtotal = localStorage.getItem('subtotal');
+
+            // Display selected seats, date, time, total price, and subtotal
+            document.getElementById('selectedSeats').textContent = selectedSeats.join(', ') || 'None';
+            document.getElementById('selectedDate').textContent = selectedDate || 'Not Selected';
+            document.getElementById('selectedTime').textContent = selectedTime || 'Not Selected';
+            document.getElementById('amount').textContent = `₹${totalPrice}.00`;
+            document.getElementById('convenienceFees').textContent = '₹147.50'; // Example fixed value
+            document.getElementById('gst').textContent = '₹22.00'; // Example fixed value
+            document.getElementById('subtotal').textContent = `₹${subtotal}.00`;
+        });
+    </script> -->
+    <!-- <script>
+        // Function to format the date to "7 Oct 2024"
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { day: 'numeric', month: 'short', year: 'numeric' };
+            return date.toLocaleDateString('en-GB', options);
+        }
+    
+        // Function to format time to 12-hour format with AM/PM
+        function formatTime(timeString) {
+            const [hour, minute] = timeString.split(':');
+            let hours = parseInt(hour);
+            const suffix = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;  // Convert to 12-hour format
+            return `${hours}:${minute} ${suffix}`;
+        }
+    
+        // Function to display booking information
+        document.addEventListener('DOMContentLoaded', () => {
+            // Retrieve data from localStorage
+            const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats')) || [];
+            const selectedDate = localStorage.getItem('selectedDate');
+            const selectedTime = localStorage.getItem('selectedTime');
+            const totalPrice = localStorage.getItem('totalPrice');
+            const subtotal = localStorage.getItem('subtotal');
+    
+            // Display selected seats, date, time, total price, and subtotal
+            document.getElementById('selectedSeats').textContent = selectedSeats.join(', ') || 'None';
+            document.getElementById('selectedDate').textContent = formatDate(selectedDate) || 'Not Selected';
+            document.getElementById('selectedTime').textContent = formatTime(selectedTime) || 'Not Selected';
+            document.getElementById('amount').textContent = `₹${totalPrice}.00`;
+            document.getElementById('convenienceFees').textContent = '₹147.50'; // Example fixed value
+            document.getElementById('gst').textContent = '₹22.00'; // Example fixed value
+            document.getElementById('subtotal').textContent = `₹${subtotal}.00`;
+        });
+    </script> -->
+    <script>
+        // Function to format the date to "7 Oct 2024" (force Oct 2024)
+        function formatDate(selectedDay) {
+            const day = selectedDay.padStart(2, '0'); // Ensure day is two digits
+            const month = 'Oct';  // Fixed month as October
+            const year = '2024';  // Fixed year as 2024
+            return `${parseInt(day)} ${month} ${year}`;
+        }
+    
+        // Function to format time to 12-hour format with AM/PM
+        function formatTime(timeString) {
+            const [hour, minute] = timeString.split(':');
+            let hours = parseInt(hour);
+            const suffix = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;  // Convert to 12-hour format
+            return `${hours}:${minute} ${suffix}`;
+        }
+    
+        // Function to display booking information
+        document.addEventListener('DOMContentLoaded', () => {
+            // Retrieve data from localStorage
+            const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats')) || [];
+            const selectedDay = localStorage.getItem('selectedDate'); // Assume this is only the day
+            const selectedTime = localStorage.getItem('selectedTime');
+            const totalPrice = localStorage.getItem('totalPrice');
+            const subtotal = localStorage.getItem('subtotal');
+    
+            // Display selected seats, forced October 2024 date, time, total price, and subtotal
+            document.getElementById('selectedSeats').textContent = selectedSeats.join(', ') || 'None';
+            document.getElementById('selectedDate').textContent = formatDate(selectedDay) || 'Not Selected';
+            document.getElementById('selectedTime').textContent = formatTime(selectedTime) || 'Not Selected';
+            document.getElementById('amount').textContent = `₹${totalPrice}.00`;
+            document.getElementById('convenienceFees').textContent = '₹147.50'; // Example fixed value
+            document.getElementById('gst').textContent = '₹22.00'; // Example fixed value
+            document.getElementById('subtotal').textContent = `₹${subtotal}.00`;
+        });
+    </script>
+    
+    
+</body>
+</html>

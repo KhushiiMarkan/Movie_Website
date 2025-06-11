@@ -1,0 +1,79 @@
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Sign Up Page</title>
+      <link rel="stylesheet" href="signup_css.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  </head>
+  <body>
+      <div class="container">
+          <header></header>
+  
+          <div class="registerbox">
+              <h1>Register Here</h1>
+              <form id="registerForm">
+                  <p>Username</p> 
+                  <input type="text" name="username" placeholder="Enter username" id="username" required>
+  
+                  <p>Email id</p> 
+                  <input type="email" name="email" placeholder="Enter Email id" id="email" required>
+                  
+                  <p>Password</p>
+                  <input type="password" name="password" placeholder="Create Password" id="password" required>
+                  
+                  <input type="submit" value="Signup" id="signUp">
+              </form>
+              <a href="/login"><h2>Already have an account? Login</h2></a>
+          </div>
+      </div>
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const signUpButton = document.getElementById("signUp");
+        
+            if (!signUpButton) {
+                console.error("Sign-up button not found!");
+                return;
+            }
+        
+            signUpButton.addEventListener("click", async (e) => {
+                e.preventDefault();
+        
+                const username = document.getElementById("username").value;
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+        
+                if (!username || !email || !password) {
+                    alert("Please fill all fields.");
+                    return;
+                }
+        
+                try {
+                    const response = await fetch("http://localhost:4009/api/register", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ username, email, password })
+                    });
+        
+                    const data = await response.json();
+                    console.log("Signup Response:", data);
+        
+                    if (data.success) {
+                        window.location.href = "/dashboard";  // ✅ Redirect after successful signup
+                    } else {
+                        alert(data.message);
+                    }
+                } catch (error) {
+                    console.error("Signup Error:", error);
+                }
+            });
+        });
+        </script>
+          
+  
+  </body>
+  </html>
+   
